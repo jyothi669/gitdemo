@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="product_section layout_padding" id="categories">
+  <div class="container">
+    <div class="heading_container heading_center">
+      <h2>
+        Your Orders
+      </h2>
+
+    </div>
+  </div>
+</section>
+
+
+  {% for i in orders %}
+  <div class="container w-50 border border-4 border-danger p-4 mb-5 text-center ">
+        <h3>Customer Name:{{user.username}}</h3><br>
+        <div class="row">
+            <div class="col-6">
+    <img src="{{i.product.image.url}}" height="100px" width="100px"><br><br>
+                </div>
+            <div class="col-6">
+    <strong>Product:</strong>{{i.product.name}}<br>
+        <strong>Price:</strong>{{i.product.price}}<br>
+        <strong>No Of Items:</strong>{{i.no_of_items}}<br>
+        <strong>Ordered On:</strong>{{i.ordered_date}}<br>
+        <strong>Delivery Status:</strong>{{i.delivery_status}}<br>
+            </div>
+        </div>
+    </div>
+
+  {% endfor %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

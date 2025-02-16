@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row" style="...">
+        <div class="col-6 p-5">
+            <div class="card">
+                <!-- Display product image -->
+                <img src="{{ product.image.url }}" class="card-img-top" alt="">
+
+                <div class="card-body">
+                    <!-- Display product name -->
+                    <h5 class="card-title">{{ product.name }}</h5>
+
+                    <!-- Display product description -->
+                    <p class="card-text">{{ product.desc }}</p>
+
+                    <!-- Display product price -->
+                    <p class="card-text"><strong>Price:</strong> ${{ product.price }}</p>
+
+                    <p class="card-text"><strong>Stock: </strong>{{ product.stock }}</p>
+
+                    <!-- Buy Now Button (optional) -->
+                    {% if user.is_superuser %}
+                    {% if product.stock > 0 %}
+                    <p>product in stock</p>
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'shop:addstock' product.id %}">Add Stock</a>
+                    {% else %}
+                    <p>product out of stock</p>
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'shop:addstock' product.id %}">Add Stock</a>
+                    {% endif %}
+                    {% else %}
+                    {% if product.stock > 0 %}
+                    <a href="{% url 'cart:addtocart' product.id %}" class="btn btn-outline-primary btn-sm">Add to Cart</a>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Buy Now</a>
+                    {% else %}
+                    <p>product out of stock</p>
+                    {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid" style="margin-top:100px;">
+    <div class="row">
+        <h3 class="text-center text-dark">Shopping Cart</h3>
+        <div class="col-8">
+            <table class="table table-bordered border-dark">
+                <tr class="text-center">
+                    <th colspan="7">
+                        CART ITEMS
+
+                    </th>
+                </tr>
+                {% for i in cart %}
+                <tr>
+                    <td><img src="{{i.product.image.url}}" height="100px" width="100px"></td>
+                    <td>ProductName:{{i.product.name}}</td>
+                    <td>ProductId:{{i.product.id}}</td>
+                    <td>Quantity:{{i.quantity}}<br>
+                    UnitPrice:{{i.product.price}}</td>
+                    <td>SubTotal:{{i.subtotal}}</td>
+                    {% if product.stock > 0  %}
+                    <td><a href="{% url 'cart:addtocart' i.product.id %}"><i class="fa-solid fa-circle-plus"></i></a></td>
+                    {% else %}
+                    <td><a href="{% url 'cart:cartdecrement' i.product.id %}"><i class="fa-solid fa-circle-minus"></i></a></td>
+                    <td><a href="{% url 'cart:cartdelete' i.product.id %}"><i class="fa-solid fa-trash"></i></a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+        <div class="col-4">
+            <table class="table table-bordered border-dark">
+                <tr class="text-center">
+                    <th colspan="3">
+                        CHECKOUT
+                    </th>
+                </tr>
+                <tr>
+                    <td class="text-center">{{total}}</td>
+                </tr>
+
+            </table>
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'cart:orderform' %}" class="btn-dark p-2">Place Order</a>
+                <a href="{% url 'shop:category' %}" class="btn-dark p-2">Continue Shopping</a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}

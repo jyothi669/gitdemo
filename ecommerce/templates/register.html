@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block background %}
+{% endblock %}
+{% block content %}
+    <section class="product_section layout_padding" id="categories">
+         <div class="container">
+            <div class="heading_container heading_center">
+               <h2 class="text-center">
+                  Register now
+               </h2>
+            </div>
+         </div>
+</section>
+<div class="container w-50 border border-4 border-danger p-4 mb-5">
+<form method="POST">
+    {% csrf_token %}
+    <table>
+    {{form.as_table}}
+        </table>
+    <input type="submit" class="btn btn-danger">
+</form>
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    </div>
+
+{% endblock %}

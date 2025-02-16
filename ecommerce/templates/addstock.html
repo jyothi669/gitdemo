@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container border border-2 border-dark shadow mt-5 p-5 w-50">
+  <h3 class="text-center mt-3">Add Stock</h3>
+  <div class="mx-auto">
+<form method="POST">
+  {% csrf_token %}
+  <table>
+  {{form.as_table}}
+    </table>
+  <input type="submit">
+</form>
+  </div></div>
+{% endblock %}
